@@ -3,10 +3,12 @@ package dingtalk
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"net"
 	"net/http"
 	"strings"
 	"time"
+	"errors"
 )
 
 type Client struct {
@@ -47,12 +49,20 @@ func (cli *Client) SendMessage(ctx context.Context, r *Request) error {
 		return err
 	}
 	req.Header.Set("content-type", "application/json")
-	resp, err := cli.httpCli.Do(req)
+	respInRaw, err := cli.httpCli.Do(req)
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer respInRaw.Body.Close()
 
+	resp := &Response{}
+	if err := json.NewDecoder(respInRaw.Body).Decode(resp); err != nil {
+	   return err
+	}
+
+	if resp.Errmsg != "ok" {
+	   return errors.New(stringBuilder("failed to send dingtalk message: ", resp.Errmsg))
+	}
 	return nil
 }
 

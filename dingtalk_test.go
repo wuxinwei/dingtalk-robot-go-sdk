@@ -33,16 +33,33 @@ func TestDingTalk_GetBody(t *testing.T) {
 func TestDingTalk_SendMessage(t *testing.T) {
 	td := NewClient()
 
-	if err := td.SendMessage(context.Background(), &Request{
-		MsgType:     MsgTypeText,
-		AccessToken: "3946b02aae68e6a03138f60740645bb691bc802f1fa307acba9d2eddc1b516ae",
-		Text: &TextMessage{
-			Content: "test ding talk custom webhook robot",
-			At: At{
-				IsAtAll: true,
+	cases:= []*Request{
+		&Request{
+			MsgType:     MsgTypeText,
+			AccessToken: "3946b02aae68e6a03138f60740645bb691bc802f1fa307acba9d2eddc1b516ae",
+			Text: &TextMessage{
+				Content: "test ding talk custom webhook robot",
+				At: At{
+					IsAtAll: true,
+				},
 			},
 		},
-	}); err != nil {
-		t.Fatal(err)
+		&Request{
+			MsgType:     MsgTypeMarkdown,
+			AccessToken: "3946b02aae68e6a03138f60740645bb691bc802f1fa307acba9d2eddc1b516ae",
+			Markdown: &Markdown{
+			    //Title: `test alert`,
+			    Text: "#测试告警邮件\n在**2019-03-01T20:18:52+08:00**到**2019-03-01T20:18:52+08:00**期间\n发生了告警",
+				At: At{
+					IsAtAll: true,
+				},
+			},
+		},
+	}
+
+	for _, tc := range cases {
+		if err := td.SendMessage(context.Background(), tc); err != nil {
+			t.Fatal(err)
+		}
 	}
 }

@@ -99,6 +99,11 @@ type Request struct {
 	FeedCard              *FeedCard
 }
 
+type Response struct {
+	Errcode int    `json:"errcode"`
+	Errmsg  string `json:"errmsg"`
+}
+
 func (r *Request) GetBody() ([]byte, error) {
 	bodyDict := make(map[string]interface{})
 	bodyDict[keyMsgType] = r.MsgType
