@@ -1,0 +1,12 @@
+language: go
+
+go:
+  - 1.11
+
+script:
+  - sudo add-apt-repository ppa:masterminds/glide -y && sudo apt-get update
+  - go version
+  - go test -v -race -coverprofile=coverage.txt -covermode=atomic
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
