@@ -1,5 +1,5 @@
-# dingtalk bot golang sdk
-[![Build Status](https://travis-ci.org/wuxinwei/dingtalk-robot-go-sdk.svg?branch=master)](https://travis-ci.org/wuxinwei/dingtalk-robot-go-sdk)
+# dingtalk robot golang sdk
+[![Actions Status](https://github.com/wuxinwei/dingtalk-robot-go-sdk/workflows/build/badge.svg)](https://github.com/wuxinwei/dingtalk-robot-go-sdk/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/wuxinwei/dingtalk-robot-go-sdk)](https://goreportcard.com/report/github.com/wuxinwei/dingtalk-robot-go-sdk)
 [![codecov](https://codecov.io/gh/wuxinwei/dingtalk-robot-go-sdk/branch/master/graph/badge.svg)](https://codecov.io/gh/wuxinwei/dingtalk-robot-go-sdk)
 
